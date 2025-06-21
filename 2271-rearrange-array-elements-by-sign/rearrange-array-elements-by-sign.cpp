@@ -14,10 +14,16 @@ public:
                 neg.push_back(nums[i]);
             }
         }
-        for(int i=0;i<n/2;i++)
+        int posIdx=0,negIdx=0;
+        for(int i=0;i<n;i++)
         {
-            nums[2*i]=pos[i];
-            nums[2*i+1]=neg[i];
+            if(i%2==0)
+            {
+                nums[i]=pos[posIdx++];
+            }
+            else{
+                nums[i]=neg[negIdx++];
+            }
         }
         return nums;
     }
