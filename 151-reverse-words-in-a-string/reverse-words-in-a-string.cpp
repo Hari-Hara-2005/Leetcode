@@ -1,10 +1,10 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        int n = s.size();
+        int n = s.size() - 1;
         string word = "";
         string res = "";
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = n; i >= 0; i--) {
             if (s[i] != ' ') {
                 word += s[i];
             } else if (!word.empty()) {
