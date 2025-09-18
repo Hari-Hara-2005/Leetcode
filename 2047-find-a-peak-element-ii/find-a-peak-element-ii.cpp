@@ -1,15 +1,15 @@
 class Solution {
 public:
-    int maxElement(vector<vector<int>>& mat, int n, int col) {
+    int maxElement(vector<vector<int>> mat, int n, int col) {
         int maxi = -1;
-        int index = -1;
+        int idx = -1;
         for (int i = 0; i < n; i++) {
             if (mat[i][col] > maxi) {
                 maxi = mat[i][col];
-                index = i;
+                idx = i;
             }
         }
-        return index;
+        return idx;
     }
     vector<int> findPeakGrid(vector<vector<int>>& mat) {
         int n = mat.size();
@@ -23,13 +23,10 @@ public:
             int right = (mid + 1 < m) ? mat[row][mid + 1] : -1;
             if (mat[row][mid] > left && mat[row][mid] > right) {
                 return {row, mid};
-            }
-            else if(left>mat[row][mid])
-            {
-                high = mid-1;
-            }
-            else{
-                low = mid+1;
+            } else if (left > mat[row][mid]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
             }
         }
         return {-1, -1};
