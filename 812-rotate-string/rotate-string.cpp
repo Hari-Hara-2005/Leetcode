@@ -5,6 +5,6 @@ public:
         int m =goal.size();
         if(n!=m)return false;
         string doubled = s+s;
-        return doubled.find(goal)!=-1;
+        return doubled.find(goal)!=string::npos;
     }
 };
