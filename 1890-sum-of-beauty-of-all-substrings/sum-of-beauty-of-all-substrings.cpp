@@ -1,13 +1,13 @@
 class Solution {
 public:
-    int getMaximum(vector<int>freq){
+    int getMaximum(vector<int>freq)
+    {
         int maxi = INT_MIN;
         int mini = INT_MAX;
         for(int i=0;i<26;i++)
         {
-            maxi=max(maxi,freq[i]);
-            if(freq[i]!=0)
-            mini=min(mini,freq[i]);
+            maxi=max(freq[i],maxi);
+            if(freq[i]!=0)mini=min(freq[i],mini);
         }
         if(maxi==INT_MIN || mini==INT_MAX)return 0;
         return (maxi-mini);
