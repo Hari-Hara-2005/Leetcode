@@ -1,17 +1,15 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int n =  nums.size();
-        unordered_map<int,int>mp;
+        int n = nums.size();
+        vector<int>ans(n+1,0);
         for(int i=0;i<n;i++)
         {
-            mp[nums[i]]++;
+            ans[nums[i]]++;
         }
-        int cnt=0;
         for(int i=0;i<=n;i++)
         {
-            if(mp[i] == 0)
-            return i;
+            if(ans[i] == 0)return i;
         }
         return -1;
     }
