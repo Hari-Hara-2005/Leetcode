@@ -9,7 +9,10 @@ public:
         }
         for(auto it:mp)
         {
-            if(it.second>n/2)return it.first;
+            if(it.second>(n/2))
+            {
+                return it.first;
+            }
         }
         return -1;
     }
