@@ -15,13 +15,14 @@ public:
             return nullptr;
         ListNode* slow = head;
         ListNode* fast = head;
-        fast = fast->next->next;
+        ListNode* prev = nullptr;
         while (fast != nullptr && fast->next != nullptr) {
+            prev = slow;
             slow = slow->next;
             fast = fast->next->next;
         }
-        ListNode* deleteNode = slow->next;
-        slow->next = slow->next->next;
+        ListNode* deleteNode = prev->next;
+        prev->next = prev->next->next;
         delete deleteNode;
         return head;
     }
