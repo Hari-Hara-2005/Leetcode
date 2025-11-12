@@ -1,27 +1,23 @@
 class Solution {
 public:
-
-    int findPascal(int row,int col)
+    vector<int> findPascal(int row)
     {
-        int res = 1;
-        for(int i=0;i<col;i++)
+        vector<int>ans;
+        int res=1;
+        ans.push_back(res);
+        for(int i=1;i<row;i++)
         {
             res = res * (row-i);
-            res = res/(i+1);
+            res = res / i;
+            ans.push_back(res);
         }
-        return res;
+        return ans;
     }
-
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>>ans;
         for(int i=0;i<numRows;i++)
         {
-            vector<int>row(i+1);
-            for(int j=0;j<=i;j++)
-            {
-                row[j] = findPascal(i,j); 
-            }
-            ans.push_back(row);
+            ans.push_back(findPascal(i+1));
         }
         return ans;
     }
