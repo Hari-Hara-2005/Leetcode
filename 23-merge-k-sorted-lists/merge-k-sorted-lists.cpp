@@ -10,28 +10,34 @@
  */
 class Solution {
 public:
-    ListNode* convert(vector<int> arr) {
-        if (arr.empty())
-            return nullptr;
-        ListNode* head = new ListNode(arr[0]);
-        ListNode* mover = head;
-        for (int i = 1; i < arr.size(); i++) {
-            ListNode* newNode = new ListNode(arr[i]);
-            mover->next = newNode;
-            mover = newNode;
+    ListNode* merge2Lists(ListNode* list1, ListNode* list2) {
+        ListNode* dummyNode = new ListNode(-1);
+        ListNode* temp = dummyNode;
+        while (list1 && list2) {
+            if (list1->val < list2->val) {
+                temp->next = list1;
+                list1 = list1->next;
+            } else {
+                temp->next = list2;
+                list2 = list2->next;
+            }
+            temp = temp->next;
         }
-        return head;
+        if (list1) {
+            temp->next = list1;
+        }
+        if (list2) {
+            temp->next = list2;
+        }
+        return dummyNode->next;
     }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        vector<int> arr;
-        for (int i = 0; i < lists.size(); i++) {
-            ListNode* curr = lists[i];
-            while (curr) {
-                arr.push_back(curr->val);
-                curr = curr->next;
-            }
+        if (lists.empty())
+            return nullptr;
+        ListNode* head = lists[0];
+        for (int i = 1; i < lists.size(); i++) {
+            head = merge2Lists(head, lists[i]);
         }
-        sort(arr.begin(), arr.end());
-        return convert(arr);
+        return head;
     }
 };
