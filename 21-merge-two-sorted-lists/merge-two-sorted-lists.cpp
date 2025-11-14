@@ -10,29 +10,24 @@
  */
 class Solution {
 public:
-    ListNode* convert(vector<int> arr) {
-        if (arr.empty())
-            return nullptr;
-        ListNode* head = new ListNode(arr[0]);
-        ListNode* curr = head;
-        for (int i = 1; i < arr.size(); i++) {
-            ListNode* newNode = new ListNode(arr[i]);
-            curr->next = newNode;
-            curr = newNode;
-        }
-        return head;
-    }
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        vector<int> arr;
-        while (list1) {
-            arr.push_back(list1->val);
-            list1 = list1->next;
+        ListNode* dummyNode = new ListNode(-1);
+        ListNode* temp = dummyNode;
+        while (list1 && list2) {
+            if (list1->val < list2->val) {
+                temp->next = list1;
+                list1 = list1->next;
+            } else {
+                temp->next = list2;
+                list2 = list2->next;
+            }
+            temp = temp->next;
         }
-        while (list2) {
-            arr.push_back(list2->val);
-            list2 = list2->next;
+        if (list1) {
+            temp->next = list1;
+        } else {
+            temp->next = list2;
         }
-        sort(arr.begin(), arr.end());
-        return convert(arr);
+        return dummyNode->next;
     }
 };
