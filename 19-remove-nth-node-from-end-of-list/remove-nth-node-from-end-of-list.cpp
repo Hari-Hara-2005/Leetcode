@@ -14,19 +14,30 @@ public:
         if (head == nullptr || head->next == nullptr)
             return nullptr;
         ListNode* curr = head;
-        ListNode* slow = head;
-        ListNode* fast = head;
-        for (int i = 0; i < n; i++) {
-            fast = fast->next;
+        int idx = 0;
+        while (curr) {
+            idx++;
+            curr = curr->next;
         }
-        if(fast == nullptr)return head->next;
-        while (fast->next != nullptr) {
-            slow = slow->next;
-            fast = fast->next;
+        curr = head;
+        int target = idx - n;
+        if (target == 0) {
+            head = curr->next;
+            delete curr;
+            return head;
         }
-        ListNode* deleteNode = slow->next;
-        slow->next = slow->next->next;
-        delete deleteNode;
+        idx = 0;
+        ListNode* prev = nullptr;
+        while (curr) {
+            if (idx == target) {
+                prev->next = curr->next;
+                delete curr;
+                break;
+            }
+            idx++;
+            prev = curr;
+            curr = curr->next;
+        }
         return head;
     }
 };
