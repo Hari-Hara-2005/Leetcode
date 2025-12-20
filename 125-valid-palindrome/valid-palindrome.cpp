@@ -6,11 +6,7 @@ public:
         string res = "";
         while (i < n) {
             if (isalnum(s[i])) {
-                if (s[i] >= 'A' && s[i] <= 'Z') {
-                    res += s[i] + 32;
-                } else {
-                    res += s[i];
-                }
+                res+=tolower(s[i]);
             }
             i++;
         }
