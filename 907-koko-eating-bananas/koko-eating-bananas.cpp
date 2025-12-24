@@ -11,7 +11,7 @@ public:
         int n = arr.size();
         long long res = 0;
         for (int i = 0; i < n; i++) {
-            res += ceil((double)arr[i] / (double)hrs);
+            res += (arr[i]+hrs-1)/hrs;
         }
         return res;
     }
