@@ -30,6 +30,8 @@ public:
         vector<int> maxAndMini = getMini(bloomDay);
         int low = maxAndMini[1], high = maxAndMini[0];
         int ans = -1;
+        if ((long long)m * k > bloomDay.size())
+        return -1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             if (possiable(bloomDay, m, k, mid)) {
