@@ -1,11 +1,11 @@
 class Solution {
 public:
-    vector<int> findNcr(int n) {
-        vector<int> ans;
+    vector<int> findNcr(int row) {
         int res = 1;
+        vector<int> ans;
         ans.push_back(res);
-        for (int i = 1; i < n; i++) {
-            res = res * (n - i);
+        for (int i = 1; i < row; i++) {
+            res = res * (row - i);
             res = res / i;
             ans.push_back(res);
         }
@@ -13,8 +13,8 @@ public:
     }
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>> ans;
-        for (int i = 0; i < numRows; i++) {
-            ans.push_back(findNcr(i + 1));
+        for (int i = 1; i <= numRows; i++) {
+            ans.push_back(findNcr(i));
         }
         return ans;
     }
