@@ -6,7 +6,6 @@ public:
         static vector<string> smb = {"M",  "CM", "D",  "CD", "C",  "XC", "L",
                                      "XL", "X",  "IX", "V",  "IV", "I"};
         string res = "";
-        int n = num;
         for (int i = 0; i < 13; i++) {
             int times = num / val[i];
             while (times--) {
