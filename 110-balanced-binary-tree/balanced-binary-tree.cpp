@@ -12,31 +12,16 @@
  */
 class Solution {
 public:
-    int findLeft(TreeNode* root) {
+    bool isBalanced(TreeNode* root) { return check(root) != -1; }
+    int check(TreeNode* root) {
         if (root == nullptr)
             return 0;
-        int l = findLeft(root->left);
-        int r = findRight(root->right);
-        return 1 + max(l, r);
-    }
-    int findRight(TreeNode* root) {
-        if (root == nullptr)
-            return 0;
-        int l = findLeft(root->left);
-        int r = findRight(root->right);
-        return 1 + max(l, r);
-    }
-    bool isBalanced(TreeNode* root) {
-        if (root == nullptr)
-            return true;
-        int l = findLeft(root->left);
-        int r = findRight(root->right);
-        if (abs(l - r) > 1)
-            return false;
-        bool left = isBalanced(root->left);
-        bool right = isBalanced(root->right);
-        if (!left || !right)
-            return false;
-        return true;
+        int l = check(root->left);
+        int r = check(root->right);
+        if (l == -1 || r == -1)
+            return -1;
+        if (abs(r - l) > 1)
+            return -1;
+        return 1 + max(r, l);
     }
 };
