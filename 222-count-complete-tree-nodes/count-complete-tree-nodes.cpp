@@ -12,18 +12,31 @@
  */
 class Solution {
 public:
+    int leftLength(TreeNode* root) {
+        int cnt = 0;
+        while (root) {
+            cnt++;
+            root = root->left;
+        }
+        return cnt;
+    }
+    int rightLength(TreeNode* root) {
+        int cnt = 0;
+        while (root) {
+            cnt++;
+            root = root->right;
+        }
+        return cnt;
+    }
     int countNodes(TreeNode* root) {
         if (root == nullptr)
             return 0;
-        int cnt = 0;
-        count(root, cnt);
-        return cnt;
-    }
-    void count(TreeNode* root, int& cnt) {
-        if (root == nullptr)
-            return;
-        cnt++;
-        count(root->left, cnt);
-        count(root->right, cnt);
+        int lh = leftLength(root);
+        int rh = rightLength(root);
+
+        if (lh == rh)
+            return (1 << lh) - 1;
+
+        return 1 + countNodes(root->left) + countNodes(root->right);
     }
 };
