@@ -6,13 +6,14 @@ public:
         queue<pair<pair<int, int>, int>> q;
         int vis[n][m];
         int tm = 0;
-
+        int freshCnt = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == 2) {
                     q.push({{i, j}, 0});
                     vis[i][j] = 2;
-                } else {
+                } else if (grid[i][j] == 1) {
+                    freshCnt++;
                     vis[i][j] = 0;
                 }
             }
@@ -20,7 +21,7 @@ public:
 
         int drow[] = {-1, 0, 1, 0};
         int dcol[] = {0, 1, 0, -1};
-
+        int cnt = 0;
         while (!q.empty()) {
             int r = q.front().first.first;
             int c = q.front().first.second;
@@ -34,17 +35,14 @@ public:
                     vis[row][col] == 0) {
                     q.push({{row, col}, tm + 1});
                     vis[row][col] = 2;
+                    cnt++;
                 }
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (grid[i][j] == 1 && vis[i][j] != 2) {
-                    return -1;
-                }
-            }
-        }
+        if (cnt != freshCnt)
+            return -1;
+
         return tm;
     }
 };
