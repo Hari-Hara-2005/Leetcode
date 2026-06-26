@@ -1,19 +1,21 @@
 class Solution {
 public:
-    bool check(vector<int>& arr) {
+    bool check(vector<int>& nums) {
+        int n = nums.size();
         int cnt = 0;
-        int n = arr.size();
         for (int i = 0; i < n - 1; i++) {
-            if (arr[i] > arr[i + 1]) {
+            if (nums[i] > nums[i + 1]) {
                 cnt++;
-                if (cnt > 1)
+                if (cnt > 1) {
                     return false;
+                }
             }
         }
-        if (arr[0] < arr[n - 1]) {
+        if (nums[0] < nums[n - 1]) {
             cnt++;
-            if (cnt > 1)
+            if (cnt > 1) {
                 return false;
+            }
         }
         return true;
     }
