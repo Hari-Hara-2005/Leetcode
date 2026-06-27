@@ -6,7 +6,7 @@ public:
         int left = 0, right = m - 1;
         int top = 0, bottom = n - 1;
         vector<int> ans;
-        while (top <= bottom && left<=right) {
+        while (left <= right && top <= bottom) {
             for (int i = left; i <= right; i++) {
                 ans.push_back(matrix[top][i]);
             }
