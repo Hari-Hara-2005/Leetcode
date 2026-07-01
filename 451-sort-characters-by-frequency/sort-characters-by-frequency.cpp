@@ -1,16 +1,19 @@
 class Solution {
 public:
     string frequencySort(string s) {
-        unordered_map<char, int> mp;
-        for (int it : s) {
-            mp[it]++;
+        int n = s.size();
+        string res;
+        unordered_map<int, int> ump;
+        for (int i = 0; i < n; i++) {
+            ump[s[i]]++;
         }
-        multimap<int, char> mmp;
+
+        multimap<int, int> mp;
+        for (auto it : ump) {
+            mp.insert({-it.second, it.first});
+        }
+
         for (auto it : mp) {
-            mmp.insert({-it.second, it.first});
-        }
-        string res = "";
-        for (auto it : mmp) {
             int freq = -it.first;
             char ch = it.second;
             while (freq--) {
