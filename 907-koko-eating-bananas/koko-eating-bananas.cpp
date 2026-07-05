@@ -1,29 +1,29 @@
 class Solution {
 public:
-    int maxi(vector<int>& arr) {
-        int res = INT_MIN;
-        for (int i = 0; i < arr.size(); i++) {
-            res = max(res, arr[i]);
-        }
-        return res;
-    }
-    long long getMinHour(vector<int>& arr, int hrs) {
-        int n = arr.size();
-        long long res = 0;
+    long long totalHour(vector<int> piles, int h) {
+        long long ans = 0;
+        int n = piles.size();
         for (int i = 0; i < n; i++) {
-            res += (arr[i]+hrs-1)/hrs;
+            ans += (piles[i] + h - 1) / h;
         }
-        return res;
+        return ans;
+    }
+    int maxiElement(vector<int> piles) {
+        int maxi = INT_MIN;
+        int n = piles.size();
+        for (int i = 0; i < n; i++) {
+            maxi = max(maxi, piles[i]);
+        }
+        return maxi;
     }
     int minEatingSpeed(vector<int>& piles, int h) {
-        int maxipile = maxi(piles);
-        int low = 1;
-        int high = maxipile;
-        int ans = -1;
+        long long res;
+        int high = maxiElement(piles);
+        int low = 1, ans = INT_MAX;
         while (low <= high) {
             int mid = low + (high - low) / 2;
-            long long res = getMinHour(piles, mid);
-            if (res <= h) {
+            res = totalHour(piles, mid);
+            if (h >= res) {
                 ans = mid;
                 high = mid - 1;
             } else {
