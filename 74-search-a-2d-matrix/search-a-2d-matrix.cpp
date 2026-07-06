@@ -1,17 +1,16 @@
 class Solution {
 public:
-    bool searchMatrix(vector<vector<int>>& arr, int target) {
-        int n = arr.size();
-        int m = arr[0].size();
-        int low = 0;
-        int high = (m*n) - 1;
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        int low = 0, high = (m * n) - 1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             int row = mid / m;
             int col = mid % m;
-            if (arr[row][col] == target)
+            if (matrix[row][col] == target) {
                 return true;
-            else if (arr[row][col] > target) {
+            } else if (matrix[row][col] > target) {
                 high = mid - 1;
             } else {
                 low = mid + 1;
