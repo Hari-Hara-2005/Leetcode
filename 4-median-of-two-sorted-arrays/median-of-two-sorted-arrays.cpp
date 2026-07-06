@@ -1,49 +1,39 @@
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int cnt = 0;
         int n = nums1.size();
         int m = nums2.size();
-        int i = 0, j = 0, mid, indel1 = 0, indel2 = 0;
-        int total = n + m;
-        int idx1 = total / 2;
-        int idx2 = idx1 - 1;
+        int i = 0, j = 0;
+        vector<int> ans;
         while (i < n && j < m) {
             if (nums1[i] <= nums2[j]) {
-                if (cnt == idx1)
-                    indel1 = nums1[i];
-                if (cnt == idx2)
-                    indel2 = nums1[i];
+                ans.push_back(nums1[i]);
                 i++;
             } else {
-                if (cnt == idx1)
-                    indel1 = nums2[j];
-                if (cnt == idx2)
-                    indel2 = nums2[j];
+                ans.push_back(nums2[j]);
                 j++;
             }
-            cnt++;
         }
+
         while (i < n) {
-            if (cnt == idx1)
-                indel1 = nums1[i];
-            if (cnt == idx2)
-                indel2 = nums1[i];
-            cnt++;
+            ans.push_back(nums1[i]);
             i++;
         }
+
         while (j < m) {
-            if (cnt == idx1)
-                indel1 = nums2[j];
-            if (cnt == idx2)
-                indel2 = nums2[j];
-            cnt++;
+            ans.push_back(nums2[j]);
             j++;
         }
-        if (total % 2 == 0) {
-            return (indel1 + indel2) / 2.00;
-        } else {
-            return indel1;
+
+        int size = ans.size();
+        int low = 0, high = size - 1;
+        int mid = low + (high - low) / 2;
+
+        if (size % 2 == 1)
+            return ans[mid];
+        else {
+            return (double)(ans[mid] + ans[mid + 1]) / 2;
         }
+        return -1;
     }
 };
