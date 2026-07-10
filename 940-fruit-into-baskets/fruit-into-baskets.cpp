@@ -2,8 +2,7 @@ class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
         int n = fruits.size();
-        int maxi = 0, len = 0;
-        int l = 0, r = 0;
+        int l = 0, r = 0, maxi = 0, len;
         unordered_map<int, int> mp;
         while (r < n) {
             mp[fruits[r]]++;
@@ -13,7 +12,8 @@ public:
                     mp.erase(fruits[l]);
                 l++;
             } else {
-                maxi = max(maxi, r - l + 1);
+                len = r - l + 1;
+                maxi = max(maxi, len);
             }
             r++;
         }
